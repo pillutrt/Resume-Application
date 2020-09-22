@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+    
+    <div [hidden]="loggedin">
+    <form class="login-form"  #mAnager="ngForm" (ngSubmit)="loginUser($event, mAnager)" novalidate>
+        <div class="form-group">
+            <label for="emAil"> Email: </label>
+            <input required ngModel name="emAil" #emAil="ngModel" id="emAil" type="email" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="passWord"> Password: </label>
+            <input required ngModel name="passWord" #passWord="ngModel" id="passWord" type="password" class="form-control">
+        </div>
+        <button [disabled]="!mAnager.form.valid" id="logIn" class="btn btn-primary" type="submit">Login</button> <br><br>
+    </form>
+    </div>
+    
+    <div [hidden]="!loggedin">
+        <table class="table table-trapped">
+            <thead class="thead-dark">
+                <tr>
+                    <th> First Name </th>
+                    <th> Last Name </th>
+                    <th> Email </th>
+                    <th> Job Position </th> 
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor= "let list of applicantsList">
+                    <td>{{ list.firstname }}</td>
+                    <td> {{ list.lastname }} </td>
+                    <td> {{ list.email }} </td>
+                    <td> {{ list.jobposition }} </td>
+                </tr>
+            </tbody>
+        </table>
+ 
+    </div> 
+
+
+</html>
+
+
+<!--<body>
+    <div [hidden]="!loggedin" ng-controller="MainCtrl as $ctrl">
+      <div id="grid1" ui-grid="{ data: $ctrl.applicantList }" class="grid"></div>
+    </div>
+  </body>
+-->  

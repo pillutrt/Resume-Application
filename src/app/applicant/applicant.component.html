@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<body>
+  <form #aPplicant="ngForm" class="login-form" (ngSubmit)="saveApplicant(aPplicant)" action="api/applicant" enctype="multipart/form-data" method = "post" novalidate>
+    <div class="form-group">
+      <label for="firstName"> First Name: </label>
+      <input required [(ngModel)]=appModel.firstName minlength="3" maxlength="25" name="firstName" #firstName="ngModel"  id="firstName" type="text" class="form-control"> 
+      <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
+        <div class="alert alert-danger" *ngIf="firstName.errors.valid">
+          First Name is required
+        </div>
+        <div class="alert alert-danger" *ngIf="firstName.errors.minlength">
+          First Name should contain at least 3 characters
+        </div>
+        <div class="alert alert-danger" *ngIf="firstName.errors.maxlength">
+          First Name should not exceed 25 characters
+        </div>
+      </div>
+      
+      
+    </div><br>
+    <div class="form-group">
+     <label for="lastName" class="text-dark"> Last Name: </label>
+     <input required [(ngModel)]="appModel.lastName" name="lastName" #lastName="ngModel"  id = "lastName" type="text" class="form-control">
+     <div class="alert alert-danger" *ngIf="lastName.touched && !lastName.valid">
+       Last Name is Reuired.
+     </div>
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="eMail"> Email ID: </label>
+      <input required [(ngModel)]="appModel.eMail" name="eMail" #eMail="ngModel"  id="eMail" type="email" class="form-control">
+      <div class="alert alert-danger" *ngIf="eMail.touched && !eMail.valid">
+        Email is Required
+      </div>
+    </div><br>
+    <div class="form-group">
+      <label for="position"> Job Role: </label>
+      <select name="position" class="form-control custom-select" placeholder="Job Role" [(ngModel)]="appModel.position" required>
+        <option>  </option>
+        <option *ngFor="let job of jobs">{{job.role}}</option>
+      </select>
+    </div><br>
+
+    <div class="form-group">
+      <label for="position"> Upload Resume File: </label>
+      <input name = "file"  placeholder="Resume" type="file" accept=".pdf,.doc,.docx" class="form-control" ngModel required/>
+      <br><button type="button" class="btn btn-primary" >Upload</button><br>
+    </div><br>
+    
+    <button [disabled]="!aPplicant.form.valid" type="submit" class="btn btn-primary">Submit</button>
+  
+    <br><br>
+      
+      
+  </form>
+
+
+  
+</body>
+</html>
